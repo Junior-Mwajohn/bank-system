@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Management System</title>
+</head>
+<body>
+    <h1>Customer List</h1>
+    <a href="/customers/new">Create New Customer</a>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Balance</th>
+            <th>Actions</th>
+        </tr>
+        <% customers.forEach(customer => { %>
+        <tr>
+            <td><%= customer.id %></td>
+            <td><%= customer.name %></td>
+            <td><%= customer.email %></td>
+            <td><%= customer.balance %></td>
+            <td>
+                <a href="/customers/edit/<%= customer.id %>">Edit</a>
+                <form action="/customers/delete/<%= customer.id %>" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <form action="/customers/deposit/<%= customer.id %>" method="POST" style="display:inline;">
+                    <input type="number" name="amount" placeholder="Amount" required>
+                    <button type="submit">Deposit</button>
+                </form>
+                <form action="/customers/withdraw/<%= customer.id %>" method="POST" style="display:inline;">
+                    <input type="number" name="amount" placeholder="Amount" required>
+                    <button type="submit">Withdraw</button>
+                </form>
+            </td>
+        </tr>
+        <% }); %>
+    </table>
+</body>
+</html>
